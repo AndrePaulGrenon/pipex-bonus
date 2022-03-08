@@ -6,7 +6,7 @@
 /*   By: agrenon <agrenon@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:04:09 by agrenon           #+#    #+#             */
-/*   Updated: 2022/03/03 18:37:27 by agrenon          ###   ########.fr       */
+/*   Updated: 2022/03/08 10:50:38 by agrenon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ char	*ft_magic_join(char *magic_mush, char *strline)
 	return (temp);
 }
 
-void	ft_pipe_here(char *magic_mush, char *strline)
+void	ft_pipe_here(char *magic_mush, char *strline, bool *is_here_doc)
 {
 	int		files[2];
 
+	*is_here_doc = true;
 	dup(0);
 	pipe(files);
 	write(files[1], magic_mush, ft_strlen(magic_mush));
@@ -75,7 +76,7 @@ void	ft_pipe_here(char *magic_mush, char *strline)
 	return ;
 }
 
-int	ft_here_doc(char **argv)
+int	ft_here_doc(char **argv, bool *is_here_doc)
 {
 	char	*strline;
 	char	*magic_mush;
@@ -91,7 +92,7 @@ int	ft_here_doc(char **argv)
 			strline = get_next_line(0);
 			if (ft_memcmp(strline, argv[2]) == 10)
 			{
-				ft_pipe_here(magic_mush, strline);
+				ft_pipe_here(magic_mush, strline, is_here_doc);
 				i = 1;
 				break ;
 			}
@@ -99,6 +100,6 @@ int	ft_here_doc(char **argv)
 		}
 	}
 	else if (open(argv[1], O_RDONLY) == -1)
-		ft_err_message(NULL, NULL);
+		ft_perror(0, NULL, NULL);
 	return (i);
 }

@@ -6,22 +6,37 @@
 /*   By: agrenon <agrenon@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 16:42:05 by agrenon           #+#    #+#             */
-/*   Updated: 2022/03/03 12:07:03 by agrenon          ###   ########.fr       */
+/*   Updated: 2022/03/07 17:07:09 by agrenon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_pipe.h"
-/*
-sizeint	ft_strlen(char *str)
-{
-	int	i;
 
+size_t	ft_strlen(char *s)
+{
+	size_t	i;
+
+	if (!s)
+		return (0);
 	i = 0;
-	while (str[i])
+	while (s[i])
 		i++;
 	return (i);
 }
-*/
+
+void	ft_pipe_loop(char **argv, char **env, int i, int at)
+{
+	char	*cmd;
+	char	**argvec;
+
+	if (at)
+		at = i;
+	argvec = malloc(sizeof(size_t) * 3);
+	cmd = ft_command(argv, argvec, env, i);
+	ft_execute_me(argvec, env, cmd, at);
+	return ;
+}
+
 char	*ft_calloc_cmd(char *str, int c, int a)
 {
 	char	*str1;

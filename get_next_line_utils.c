@@ -6,22 +6,10 @@
 /*   By: agrenon <agrenon@student.42quebec.>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 18:45:06 by agrenon           #+#    #+#             */
-/*   Updated: 2022/03/03 18:23:08 by agrenon          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:52:24 by agrenon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "lib_pipe.h"
-
-size_t	ft_strlen(char *s)
-{
-	size_t	i;
-
-	if (!s)
-		return (0);
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 char	*ft_calloc(size_t count, size_t size)
 {

@@ -6,7 +6,7 @@
 /*   By: agrenon <agrenon@student.42quebec.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/24 17:24:13 by agrenon           #+#    #+#             */
-/*   Updated: 2022/03/03 17:55:58 by agrenon          ###   ########.fr       */
+/*   Updated: 2022/03/07 17:06:11 by agrenon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ void	ft_execute_me(char **argvec, char **env, char *cmd, int i)
 			dup2(5, 1);
 		else
 			dup2(6, 1);
-		execve(cmd, argvec, env);
+		if (execve(cmd, argvec, env) == -1)
+			ft_perror(1, argvec, cmd);
 	}
 	dup2(4, 0);
 	close(5);
 	close(4);
-	wait(NULL);
 	ft_free_argvec(argvec, cmd);
 	return ;
 }
